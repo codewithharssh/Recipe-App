@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+        <title></title>
+<style>
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+margin:0; 
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:white;
+font-family: 'Montserrat', sans-serif;
+overflow:hidden;
+}
+
+.wlcm-title{
+font-size:25px;
+margin-top:30px;
+margin-left:20px;
+}
+
+.search-box i{
+color:grey;        
+}
+
+.search-box input{
+all:unset;  
+height:40px;
+width:80%;
+margin-left:10px;
+padding:10px;
+position:absolute;
+top:0;
+}
+
+.all-categories{
+position:relative;
+top:85px;
+left:15px;
+padding:10px;
+height:60px;
+padding-bottom:20px;
+overflow-x:scroll;
+overflow-y:hidden;
+display:flex;
+padding-left:0;
+}
+
+.all-categories::-webkit-scrollbar{
+display:none;        
+}
+
+.all-categories .categories{
+padding:15px;  
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+height:40px;
+width:120px;
+border-radius:5px;
+margin-top:10px;
+cursor:pointer;
+font-size:12px;
+margin-left:6px;
+position:relative;
+top:-10px;
+background:rgba(35,163,138,0.5);
+border:1px solid #23A38A;
+}
+
+.all-categories .categories.selected{
+background:#23A38A;        
+}
+
+.as-category-box{
+all:unset;  
+height:570px;
+width:100%;
+padding:20px;
+position:absolute;
+top:230px;
+transition:all .2s;
+overflow:hidden;
+overflow-y:scroll;
+}
+
+.as-category-box::-webkit-scrollbar{
+display:none;        
+}
+
+.card{
+height:220px; 
+width:100%;
+border-radius:15px;
+margin-top:12px;
+background:black;
+overflow:hidden;
+position:relative;
+top:-15px;
+transition:all .2s;
+}
+
+.card:hover{
+ transform:scale(1.05);      
+}
+
+.card .img-box{
+height:100%;  
+width:100%;
+border-radius:15px;
+background:red;
+overflow:hidden;
+transition:all .2s;
+}
+
+.card:hover .img-box{
+ transform:scale(1.5);      
+}
+
+.card .img-box::before{
+content:"";
+height:220px;
+width:100%;
+background:rgba(0,0,0,0.55);
+position:absolute;
+border-radius:15px;
+}
+
+.card .img-box img{
+height:220px;
+width:100%;
+border-radius:15px;
+z-index:2;
+}
+
+.card .meal-name{
+position:relative;      
+top:-195px;
+left:20px;
+color:white;
+font-weight:600;
+}
+
+.card button{
+all:unset;  
+height:30px;
+width:90px;
+border-radius:30px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+background:#23A38A;
+white-space:nowrap;
+font-weight:600;
+padding:5px;
+position:absolute;
+margin-top:-85px;
+margin-left:15px;
+font-size:13px;
+}
+
+.details-box .tool{
+ height:50px;
+display:flex;
+align-items:center;
+}
+
+.details-box .tool h2{
+position:relative;        
+top:25%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+.details-box .detail-img-box{
+height:200px;  
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+.details-box .detail-img-box img{
+height:200px; 
+width:100%;
+border-radius:15px;
+}
+
+.details-box .detail-meal-name{
+margin-top:8px;
+font-size:20px;
+}
+
+.details-box .meal-category,.details-box .meal-area{
+height:50px;  
+padding:5px;
+border:1px solid #23A38A;
+background:rgba(35,163,138,0.5);
+color:white;
+border-radius:5px;
+width:185px;
+display:flex;
+justify-content:center;
+align-items:center;
+float:left;
+margin-left:10px;
+margin-top:20px;
+position:relative;
+left:-5px;
+}
+
+.details-box .ingredients{
+height:400px;    
+width:100%;
+position:relative;
+top:90px;
+}
+
+.details-box .ingredients .ingre-txt{
+position:relative;   
+top:-60px;
+}
+
+.details-box .ingredients .no-of-ingredients{
+position:absolute;
+right:15px;
+margin-top:-80px;
+color:grey;
+font-weight:600;
+}
+
+.details-box .other-btns{
+position:absolute;  
+left:0;
+bottom:0;
+width:100%;
+height:100px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.details-box .other-btns button,.details-box .other-btns a{
+all:unset; 
+height:50px;
+width:43%;
+background:red;
+color:white;
+border-radius:15px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin-left:15px;
+font-weight:600;
+text-decoration:none;
+white-space:nowrap;
+position:relative;
+left:-15px;
+}
+
+.details-box .other-btns .start-cooking-btn{
+background:#23A38A;
+}
+
+.details-box .other-btns .watch-tutorials-btn i{
+position:relative;  
+left:-5px;
+}
+
+.details-box .ingredients-box{
+height:290px;
+width:97%;
+position:relative;
+top:-38px;
+overflow-y:scroll;
+}
+
+.details-box .ingredients-box::-webkit-scrollbar{
+display:none;        
+}
+
+.details-box .ingredients-box .ingredient{
+height:50px;        
+width:100%;
+border:1px solid black;
+border-radius:5px;
+display:flex;
+align-items:center;
+padding:5px;
+font-weight:600;
+margin-top:8px;
+position:relative;
+top:-5px;
+padding-left:15px;
+}
+
+.details-box .ingredients-box .ingredient-measure{
+position:absolute;    
+right:15px;
+font-weight:600;
+color:grey;
+}
+
+.details-box .tool .fa-chevron-left{
+color:grey;  
+font-size:25px;
+margin-left:5px;
+}
+
+.instructions-box{
+height:100%; 
+width:100%;
+background:white;
+position:fixed;
+top:0;
+left:-100%;
+transition:all .2s;
+padding:20px;
+overflow-y:scroll;
+padding-top:60px;
+}
+
+.instructions-box .instructions-close-icon{
+padding:10px;
+background:#23A38A;
+border-radius:3px;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+position:absolute;
+top:20px;
+right:30px;
+cursor:pointer;
+}
+
+.instructions-box .instructions{
+white-space:pre-wrap;
+word-wrap:break-word;
+font-size:1em;        
+}
+
+.search-result-box{
+height:100%; 
+width:100%;
+background:white;
+position:fixed;
+left:-100%;
+z-index:1;
+transition:all .2s;
+overflow-y:scroll;
+padding-bottom:120px;
+padding:20px;
+}
+
+.search-result-box .card{
+position:relative;     
+top:40px;
+}
+
+.search-box{
+height:60px;   
+width:100%;
+position:absolute;
+background:#F6F7FB;
+border-radius:5px;
+padding:20px;
+position:absolute;
+top:50%;
+left:55%;
+transform:translate(-50%,-50%);
+top:140px;
+transition:all .2s;
+z-index:1;
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.search-box.search-style{
+top:50px;   
+width:85%;
+left:60%;
+}
+
+.details-box {
+        height: 100%;
+        width: 100%;
+        background: white;
+        position: fixed;
+        top: 0;
+        left: -120%;
+        padding: 20px;
+        transition: all .2s;
+        z-index:1;
+}
+
+.instructions-box {
+        height: 100%;
+        width: 100%;
+        background: white;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        transition: all .2s;
+        padding: 20px;
+        overflow-y: scroll;
+        padding-top: 60px;
+        z-index:1;
+}
+
+.search-result-box #search-result-back{
+font-size:24px;   
+position:fixed;
+left:25px;
+top:40px;
+color:grey;
+}
+</style>        
+</head>
+
+<body>
+         <div class="search-result-box">
+        </div>       
+       <h1 class="wlcm-title">Find Best Recipe <br>For Cooking</h1>
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="userInput" placeholder="Search Recipes">
+        </div>
+        
+        <div class="all-categories">
+            <!--Insert All Categories In This Box-->
+        </div>
+        <div class="as-category-box">
+            <!--Insert food Cards In This Box-->
+        </div>
+        <div class="details-box">
+             <div class="tool">
+           <i class="fa-solid fa-chevron-left"></i>
+           <h2>Receipt</h2>
+             </div>   
+          <div class="detail-img-box">
+            <img src="" alt="">      
+          </div>   
+          <h2 class="detail-meal-name">Toast with egg and avocado</h2>
+          <div class="meal-category">Breakfast</div>
+          <div class="meal-area">Italian</div>
+          <div class="ingredients">
+             <h3 class="ingre-txt">Ingredients</h3>    
+             <span class="no-of-ingredients">6 items</span>
+             <div class="ingredients-box">
+                <!--Insert ingredient in this box-->
+             </div>
+          </div>
+          <div class="other-btns">
+             <a href=""><button class="watch-tutorials-btn"><i class="fa-solid fa-video"></i> Watch Tutorial</button></a>
+             <button class="start-cooking-btn">Start Cooking</button>
+          </div>
+        </div>
+        <div class="instructions-box">
+                <span class="instructions-close-icon"><i class="fa-solid fa-xmark"></i></span>
+           <span class="instructions"></span>
+        </div>
+<script>
+let allCategries = document.querySelector('.all-categories');
+let shownAsCategory = document.querySelector('.as-category-box');
+let detailImg = document.querySelector('.details-box .detail-img-box img');
+let detailMealName = document.querySelector('.details-box .detail-meal-name');
+let mealCategoryName = document.querySelector('.details-box .meal-category')
+let mealCategoryArea = document.querySelector('.details-box .meal-area');
+let ingredientsBox = document.querySelector('.ingredients-box');
+let no_of_ingredients = document.querySelector('.no-of-ingredients');
+let infoBackBtn = document.querySelector('.details-box .tool .fa-chevron-left');
+let watchBtn = document.querySelector('.other-btns a');
+let startCookingBtn = document.querySelector('.other-btns .start-cooking-btn');
+let instructionsBox = document.querySelector('.instructions-box');
+let instructions = document.querySelector('.instructions-box .instructions');
+let instructionsCloseIcon = document.querySelector('.instructions-box .instructions-close-icon');
+let searchInput = document.querySelector('.search-box input');
+let searchResultBox = document.querySelector('.search-result-box');
+
+let categoriesUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+let filtCategoryUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+let defaultCategoryUrl = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=Breakfast';
+let url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+let searchUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s='
+let categories = '';      
+let getAllCategories =()=>{
+  fetch(categoriesUrl).then((res) => res.json()).then((category,id)=>{
+    for(let i=0;i<14;i++){
+     categories = `<div class="categories" onclick="showAccoCategory(this, ${i})">
+                         <h3>${category.meals[i].strCategory}</h3>       
+                     </div>`; 
+     allCategries.innerHTML += categories;
+    }    
+  })
+}
+
+let showAccoCategory =(currElem, currId)=>{
+  shownAsCategory.innerHTML = ''; 
+let elem = document.querySelectorAll('.categories');
+for(let i=0;i<elem.length;i++){
+   if(elem[i].classList.contains('selected')){
+       elem[i].classList.remove('selected');  
+   }  
+}
+document.querySelectorAll('.categories')[currId].classList.add('selected');
+  let categoryName = currElem.children[0].textContent;
+  let ourMeal = '';
+  fetch(filtCategoryUrl + categoryName).then(res => res.json()).then((mymeal)=>{
+   for(let i=0;i<mymeal.meals.length;i++){
+     ourMeal = `<div class="card">
+               <div class="img-box">
+                  <img src="${mymeal.meals[i].strMealThumb}" alt="">     
+               </div>  
+               <h3 class="meal-name">${mymeal.meals[i].strMeal}</h3>
+               <button class="get-ingredient-btn">Get Ingredient</button>
+               <button class="get-recipe-btn" onClick="getRecipe('${mymeal.meals[i].strMeal}')">Get Recipe</button>
+           </div>   `;  
+ shownAsCategory.innerHTML += ourMeal;
+   }      
+ })
+}
+
+let showDefaultCategory =()=>{
+        
+ fetch(defaultCategoryUrl).then(res => res.json()).then((mymeal)=>{
+ document.querySelectorAll('.categories')[1].classList.add('selected');
+    for(let i=0;i<mymeal.meals.length;i++){
+      ourMeal = `<div class="card">
+                     <div class="img-box">
+                        <img src="${mymeal.meals[i].strMealThumb}" alt="">     
+                     </div>  
+                     <h3 class="meal-name">${mymeal.meals[i].strMeal}</h3>
+                     <button class="get-ingredient-btn">Get Ingredient</button>
+                     <button class="get-recipe-btn" onclick="getRecipe('${mymeal.meals[i].strMeal}')">Get Recipe</button>
+                 </div>`;  
+ shownAsCategory.innerHTML += ourMeal;
+    }  
+ })    
+}
+
+let getRecipe =(recipeName)=>{
+ document.querySelector('.details-box').style.left = '0px'; 
+ fetch(url + recipeName).then(res => res.json()).then((mymeal) =>{
+     console.log(mymeal)
+   detailMealName.innerHTML = mymeal.meals[0].strMeal;
+   detailImg.src = mymeal.meals[0].strMealThumb;
+   mealCategoryName.innerHTML = mymeal.meals[0].strCategory;
+   mealCategoryArea.innerHTML = mymeal.meals[0].strArea;
+   let myMeal = mymeal.meals[0];
+   let count = 1;
+   let ingredients = [];
+   for(let i in myMeal){
+     let ingredient = '';
+     let measure = '';
+     if(i.startsWith('strIngredient') && myMeal[i]){
+        ingredient = myMeal[i];
+        measure = myMeal['strMeasure' + count]
+        count += 1;
+        ingredients.push(`
+            <span class="ingredient-name">${ingredient}</span>
+             <span class="ingredient-measure">${measure}</span>`);
+     }
+   }
+   
+let ul = document.createElement('ul');
+ingredients.forEach((i) => {
+let child = document.createElement('li');
+child.classList.add('ingredient');
+child.innerHTML = i;
+ul.appendChild(child)
+ingredientsBox.appendChild(ul);
+let noOfIngredients = ingredients.length;
+no_of_ingredients.innerHTML = noOfIngredients + ' items';
+})  
+watchBtn.href = `${mymeal.meals[0].strYoutube}`;
+instructions.innerHTML = mymeal.meals[0].strInstructions;
+ })
+}
+
+infoBackBtn.addEventListener('click',()=>{
+ document.querySelector('.details-box').style.left = '-100%'; 
+ ingredientsBox.innerHTML = '';
+ instructions.innerHTML = "";
+})
+
+startCookingBtn.addEventListener('click',()=>{
+  instructionsBox.style.left = '0px';    
+});
+
+instructionsCloseIcon.addEventListener('click',()=>{
+  instructionsBox.style.left = '-120%';
+});
+
+let getSearchResult =()=>{
+  if(searchInput.value != ''){   
+searchResultBox.style.left = '0px';
+searchResultBox.innerHTML = '';
+ fetch(searchUrl + searchInput.value).then(res => res.json()).then((data)=>{
+ for(let i=0;i<data.meals.length;i++){
+  ourMeal = `<div class="card">
+                 <div class="img-box">
+                    <img src="${data.meals[i].strMealThumb}" alt="">     
+                 </div>  
+                 <h3 class="meal-name">${data.meals[i].strMeal}</h3>
+                 <button class="get-ingredient-btn">Get Ingredient</button>
+                 <button class="get-recipe-btn" onClick="getRecipe('${data.meals[i].strMeal}')">Get Recipe</button>
+             </div>   `; 
+   searchResultBox.innerHTML += ourMeal;
+ }      
+ })  
+}
+}
+
+searchInput.addEventListener('keyup',(e)=>{
+ if(e.key == 'Enter'){
+    getSearchResult();  
+    document.querySelector('.search-box').classList.add('search-style');
+    searchResultBox.innerHTML += `<i class="fa-solid fa-chevron-left" id="search-result-back" onclick="getBackSearchResult()"></i>   `;
+ }   
+})
+
+let getBackSearchResult =()=>{
+searchResultBox.style.left = '-100%';
+document.querySelector('.search-box').style.top = '140px';
+document.querySelector('.search-box').style.width = '100%';
+document.querySelector('.search-box').style.left = '55%';
+searchResultBox.innerHTML = '';
+searchInput.value = '';
+}
+showDefaultCategory();
+getAllCategories();
+/*let randomCategoriesColor =()=>{
+ let colors =['#E13300','#1E3264','#E8125C','#E9142A','#B02897','#A56752','#D84000','#8C67AC','#7358FF','#158A08','#B51223','#8C227A'];
+ let randomColors = colors[Math.floor(Math.random() * colors.length)];
+ return randomColors;
+}*/
+
+//randomCategoriesColor();
+</script>
+</body>
+
+</html>
